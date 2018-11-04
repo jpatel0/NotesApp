@@ -57,7 +57,7 @@ var deleteNote = (title) => {
 };
 
 var listNotes = () => {
-  console.log('List of notes:');
+    return fetchNotes();
 }
 
 module.exports={

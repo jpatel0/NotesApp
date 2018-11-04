@@ -38,7 +38,14 @@ switch (argv._[0]) {
 		break;
 
 	case 'list':
-		notes.listNotes();
+		var allNotes=notes.listNotes();
+		if (allNotes.length>0) {
+
+			allNotes.forEach((note) => {
+				console.log('Title:',note.title);
+				console.log('Body:',note.body);
+			});
+		}
 		break;
 
 	default:
