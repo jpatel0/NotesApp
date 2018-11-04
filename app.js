@@ -22,6 +22,15 @@ switch (argv._[0]) {
 		notes.editNote(argv.title);
 		break;
 
+	case 'read':
+		var readNote = notes.getNote(argv.title);
+		if (readNote) {
+			console.log('Note found:',`\nTitle: ${readNote.title}\nBody: ${readNote.body}`);
+		}else {
+			console.log('Note not found');
+		}
+		break;
+
 	case 'remove':
 		var deletedNote=notes.deleteNote(argv.title);
 		var message=deletedNote ? 'Note was removed' : 'Cant find the note';

@@ -40,6 +40,14 @@ var editNote = (title) => {
   console.log('editNote:',title);
 };
 
+
+var getNote = (title) => {
+    var notes = fetchNotes();
+    var filteredNotes = notes.filter((note) => note.title === title);
+    return filteredNotes[0];
+};
+
+
 var deleteNote = (title) => {
     var getNotesArray = fetchNotes();
     var filteredNotes = getNotesArray.filter((note) => note.title !== title);
@@ -55,6 +63,7 @@ var listNotes = () => {
 module.exports={
   addNote,
   editNote,
+  getNote,
   deleteNote,
   listNotes
 };
