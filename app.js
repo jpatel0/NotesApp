@@ -1,14 +1,42 @@
-console.log('Hello World');
 
 const fs = require('fs');
-const note=require('./notes.js');
+const yargs = require('yargs');
+const notes=require('./notes.js');
 
+var argv=yargs.argv;
+console.log(argv);
 
-note.addNote("tttt","ggg");
+switch (argv._[0]) {
+	case 'add':
+		var addedNote=notes.addNote(argv.title,argv.body);
+		if (addedNote) {
+			console.log("Note added:\n");
+			console.log(`Title: ${addedNote.title} \n Body: ${addedNote.body}`);
+		}
+		else {
+			console.log('Error:','Another note with same title already exists');
+		}
+		break;
 
-fs.appendFile("nnn.txt","jdj",(err) => {
+	case 'edit':
+		notes.editNote(argv.title);
+		break;
+
+	case 'remove':
+		var deletedNote=notes.deleteNote(argv.title);
+		var message=deletedNote ? 'Note was removed' : 'Cant find the note';
+		console.log(message);
+		break;
+
+	case 'list':
+		notes.listNotes();
+		break;
+
+	default:
+		console.log('invalid input argv');
+}
+
+/*fs.appendFile("nnn.txt","jdj",(err) => {
 	if(err)
 		console.log("Error",err);
-});
-
-console.log('fs: ',"dd");
+});*/
