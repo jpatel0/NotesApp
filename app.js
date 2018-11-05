@@ -3,7 +3,32 @@ const fs = require('fs');
 const yargs = require('yargs');
 const notes=require('./notes.js');
 
-var argv=yargs.argv;
+const titleOptions = {
+	describe: "Title of note",
+	demand: true,
+	alias: 't'
+};
+
+const bodyOptions = {
+	describe: "Body of note",
+	demand: true,
+	alias: 'b'
+};
+
+var argv=yargs.command('add','Add a Note',{
+				title: titleOptions,
+				body: bodyOptions
+			})
+			.command('remove','Remove a note',{
+				title: titleOptions
+			})
+			.command('read','Read a Note',{
+				title: titleOptions
+			})
+			.command('list','List all notes')
+			.help()
+			.argv;
+
 console.log(argv);
 
 switch (argv._[0]) {
@@ -51,8 +76,3 @@ switch (argv._[0]) {
 	default:
 		console.log('invalid input argv');
 }
-
-/*fs.appendFile("nnn.txt","jdj",(err) => {
-	if(err)
-		console.log("Error",err);
-});*/
